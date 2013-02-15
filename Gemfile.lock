@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httpclient (2.3.2)
+    nokogiri (1.5.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  httpclient
+  nokogiri

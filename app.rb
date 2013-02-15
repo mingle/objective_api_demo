@@ -1,0 +1,2 @@
+require "httpclient"
+require "nokogiri"
