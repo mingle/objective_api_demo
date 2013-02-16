@@ -1,3 +1,8 @@
+# Watch for creation of Objectives in a program and create cards for these objective.
+# DO NOT USE in production as is.
+# This is just a demo
+
+
 require "rubygems"
 require "httpclient"
 require "nokogiri"
