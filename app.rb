@@ -19,20 +19,20 @@ CLIENT = HTTPClient.new
 def watch_feed
   log "Checking for updates..."
   feed = Feedzirra::Feed.fetch_and_parse("http://#{API_USERNAME}:#{API_PASSWORD}@#{MINGLE_HOST}:#{MINGLE_PORT}/api/v2/programs/#{PROGRAM}/plan/feeds/events.xml")
-  last_entry_id = ''
+  last_entry_updated_at = Time.now.to_i
   while(true) do
     updated_feed = Feedzirra::Feed.update(feed)
     new_entries = updated_feed.entries.select do |entry|
-      entry.entry_id > last_entry_id
+      entry.updated.to_i > last_entry_updated_at
     end
 
     if new_entries.empty?
       log "Parsed feed. No new entries found"
     else
-      log "New entry found."
-      last_entry_id = new_entries.first.entry_id
+      log "Parsed feed. #{new_entries.length } new entries found."
+      last_entry_updated_at = new_entries.first.updated.to_i
       new_entries.each do |entry|
-        process_entry(entry)
+       process_entry(entry)
       end
     end
     sleep(3)
